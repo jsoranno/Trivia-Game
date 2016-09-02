@@ -64,8 +64,10 @@ var game = {
 	}, //end timeConverter
 
 	displayQuestion: function(){
-		$('#question').html(game.trivia[game.q1]).question;
+		$("#question").html("<p>" + game.trivia.q1.question + "</p>");
+		$("#answers").html("<p>" + game.trivia.q1.a1 + "</p>" + "<p>" + game.trivia.q1.a2 + "</p>" + "<p>" + game.trivia.q1.a3 + "</p>" + "<p>" + game.trivia.q1.a4 + "</p>");
 		console.log("firstquestion");
+		//and something to show the current index instead of q1
 	}, //end of displayQuestion
 
 	nextQuestion: function(){
