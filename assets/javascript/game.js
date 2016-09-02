@@ -11,6 +11,8 @@
 
 // VARIABLES
 // ==========================================================================
+$(document).ready(function(){
+
 var game = {
 	
 	time:25,
@@ -19,13 +21,14 @@ var game = {
 // FUNCTION DECLARATIONS
 // ==============================================================================		
     start: function(){
-	    counter = setTimeout(game.count, 1000);
+	    counter = setInterval(game.count, 1000);
 	},
 	count: function(){
         game.time--;
         currentTime = game.timeConverter(game.time);
         $("#timer").html(currentTime);
         console.log(currentTime);
+        $("#display").html(currentTime);
     },//end count
 
 	timeConverter: function(t){
@@ -46,10 +49,9 @@ var game = {
 }; //game
 // FUNCTION CALLS
 	// ==============================================================================
-$(document).ready(function(){ 
-	$('#timer').ready(game.start); 
-});
 
+	$("#timer").on('click', game.start());
+});
 // $(document).ready(function(){
 // 	console.log("window has loaded");
 // 	console.log("Timer has started");
