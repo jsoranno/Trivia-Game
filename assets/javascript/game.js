@@ -23,6 +23,15 @@ var game = {
     start: function(){
 	    counter = setInterval(game.count, 1000);
 	},
+	stop: function() {
+		if (game.time === 0) {
+			game.time = 0;
+			//result page shows
+		}
+		else{
+		
+		}
+		},
 	count: function(){
         game.time--;
         currentTime = game.timeConverter(game.time);
@@ -46,6 +55,13 @@ var game = {
 	
 	    return minutes + ":" + seconds;
 	}, //end timeConverter
+
+
+
+
+
+
+
 }; //game
 // FUNCTION CALLS
 	// ==============================================================================
