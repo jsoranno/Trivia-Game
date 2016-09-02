@@ -18,7 +18,7 @@ var game = {
 	time:25,
 
 	trivia: {
-		q1: {question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way"},
+		q1: {question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way Down"},
 		q2: {question: "Who is the founder of jQuery?", a1:"Bill Gates", a2:"John Resig", a3:"Mark Zuckerburg", a4:"Steve Jobs"},
 		q3: {question: "Who created Bootstrap?", a1:"Your mom", a2:"Facebook", a3:"Twitter", a4:"Stuart Weitzman"},
 		q4: {question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"},
@@ -42,9 +42,8 @@ var game = {
 	count: function(){
         game.time--;
         currentTime = game.timeConverter(game.time);
-        $("#timer").html(currentTime);
+        $("#timer").html("<h3>" + currentTime + "</h3>");
         console.log(currentTime);
-        $("#display").html(currentTime);
     },//end count
 
 	timeConverter: function(t){
@@ -64,7 +63,7 @@ var game = {
 	}, //end timeConverter
 
 	displayQuestion: function(){
-		$("#question").html("<p>" + game.trivia.q1.question + "</p>");
+		$("#question").html("<h2>" + game.trivia.q1.question + "</h2>");
 		$("#answers").html("<p>" + game.trivia.q1.a1 + "</p>" + "<p>" + game.trivia.q1.a2 + "</p>" + "<p>" + game.trivia.q1.a3 + "</p>" + "<p>" + game.trivia.q1.a4 + "</p>");
 		console.log("firstquestion");
 		//and something to show the current index instead of q1
