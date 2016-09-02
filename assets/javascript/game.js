@@ -17,6 +17,14 @@ var game = {
 	
 	time:25,
 
+	trivia: {
+		q1: {question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way"},
+		q2: {question: "Who is the founder of jQuery?", a1:"Bill Gates", a2:"John Resig", a3:"Mark Zuckerburg", a4:"Steve Jobs"},
+		q3: {question: "Who created Bootstrap?", a1:"Your mom", a2:"Facebook", a3:"Twitter", a4:"Stuart Weitzman"},
+		q4: {question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"},
+
+	}, //end of trivia
+
 
 // FUNCTION DECLARATIONS
 // ==============================================================================		
@@ -25,11 +33,10 @@ var game = {
 	},
 	stop: function() {
 		if (game.time === 0) {
-			game.time = 0;
 			//result page shows
 		}
 		else{
-		
+			//nothing
 		}
 		},
 	count: function(){
@@ -56,6 +63,14 @@ var game = {
 	    return minutes + ":" + seconds;
 	}, //end timeConverter
 
+	displayQuestion: function(){
+		$('#question').html(game.trivia[game.q1]).question;
+		console.log("firstquestion");
+	}, //end of displayQuestion
+
+	nextQuestion: function(){
+		// $("#question").html(game.trivia.q1"question");
+	}, //end of nextQuestion
 
 
 
@@ -67,9 +82,8 @@ var game = {
 	// ==============================================================================
 
 	$("#timer").on('click', game.start());
-});
+	$("#question").on('click', game.displayQuestion());
+}); // end document ready
 // $(document).ready(function(){
-// 	console.log("window has loaded");
-// 	console.log("Timer has started");
-// });
+
 
