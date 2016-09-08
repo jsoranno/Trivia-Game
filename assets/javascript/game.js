@@ -13,6 +13,9 @@
 // ==========================================================================
 $(document).ready(function(){
 
+var winCounter = 0;
+var lossCounter = 0;
+
 var game = {
 	
 	time:25,
@@ -24,6 +27,11 @@ var game = {
 		q4: {question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"},
 
 	}, //end of trivia
+
+	correctq1: a1,
+	correctq2: a2,
+	correctq3: a3,
+	correctq4: a2, 
 
 
 // FUNCTION DECLARATIONS
@@ -62,15 +70,31 @@ var game = {
 	    return minutes + ":" + seconds;
 	}, //end timeConverter
 
-	displayQuestion: function(){
+	displayFirstQuestion: function(){
 		$("#question").html("<h2>" + game.trivia.q1.question + "</h2>");
-		$("#answers").html("<p>" + game.trivia.q1.a1 + "</p>" + "<p>" + game.trivia.q1.a2 + "</p>" + "<p>" + game.trivia.q1.a3 + "</p>" + "<p>" + game.trivia.q1.a4 + "</p>");
+		$("#a1").html("<p id='a1'>" + game.trivia.q1.a1 + "</p>");
+		$("#a2").html("<p id='a2'>" + game.trivia.q1.a2 + "</p>");
+		$("#a3").html("<p id='a3'>" + game.trivia.q1.a3 + "</p>");
+		$("#a4").html("<p id='a4'>" + game.trivia.q1.a4 + "</p>");
 		console.log("firstquestion");
+		$("#a1").click(function() {
+			console.log("Clicked a1");
+			$("#a1").data('clicked', true);
+			nextQuestion ();
+			winCounter++;
+
+		})
+
 		//and something to show the current index instead of q1
-	}, //end of displayQuestion
+	},
+	// userAnswer: function(){
+	// 	if(){};
+
+	// }, //end of displayQuestion
 
 	nextQuestion: function(){
 		// $("#question").html(game.trivia.q1"question");
+		game.start();
 	}, //end of nextQuestion
 
 
@@ -83,7 +107,7 @@ var game = {
 	// ==============================================================================
 
 	$("#timer").on('click', game.start());
-	$("#question").on('click', game.displayQuestion());
+	$("#question").on('click', game.displayFirstQuestion());
 }); // end document ready
 // $(document).ready(function(){
 
