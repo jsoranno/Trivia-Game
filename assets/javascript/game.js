@@ -21,23 +21,46 @@ var game = {
 	time:25,
 
  	trivia: {
- 		q1: {question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way Down"},
-		q2: {question: "Who is the founder of jQuery?", a1:"Bill Gates", a2:"John Resig", a3:"Mark Zuckerburg", a4:"Steve Jobs"},
-		q3: {question: "Who created Bootstrap?", a1:"Your mom", a2:"Facebook", a3:"Twitter", a4:"Stuart Weitzman"},
-		q4: {question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"},
+ 		q1: {question: "Who runs the world?", 
+ 			a1: "Girls", 
+ 			a2: "Machines", 
+ 			a3: "The Nothing", 
+ 			a4: "Turtles All The Way Down"
+ 		}, //end q1
+		
+		q2: {question: "Who is the founder of jQuery?", 
+			a1:"Bill Gates", 
+			a2:"John Resig", 
+			a3:"Mark Zuckerburg", 
+			a4:"Steve Jobs"
+		}, //end q2
+
+		q3: {question: "Who created Bootstrap?", 
+			a1:"Your mom", 
+			a2:"Facebook", 
+			a3:"Twitter", 
+			a4:"Stuart Weitzman"
+		}, //end q3
+		
+		q4: {question: "Who was the first woman programmer?", 
+			a1:"Grace Hopper", 
+			a2: "Ada Lovelace", 
+			a3: "Adele Goldberg", 
+			a4:"Karen Petrie"
+		}, //end q4
 	}, //end of trivia
 	
-
-	correctq1: game.trivia.q2.a1,
-	correctq2: game.trivia.q2.a2,
-	correctq3: game.trivia.q3.a3,
-	correctq4: game.trivia.q4.a2, 
+	//this is throwing an error
+	// correctq1: game.trivia.q2.a1,
+	// correctq2: game.trivia.q2.a2,
+	// correctq3: game.trivia.q3.a3,
+	// correctq4: game.trivia.q4.a2, 
 
 
 // FUNCTION DECLARATIONS
 // ==============================================================================		
     start: function(){
-	    counter = setInterval(game.count, 1000);
+	    var counter = setInterval(game.count, 1000);
 	},
 	stop: function() {
 		if (game.time === 0) {
@@ -82,8 +105,14 @@ var game = {
 			$("#a1").data('clicked', true);
 			// nextQuestion ();
 			winCounter++;
+			alert("Correct!");
+		});//click
 
-		});
+		$("#a2, #a3, #a4").click(function() {
+			alert("WRONG!");
+			lossCounter++;
+			console.log("clicked anything wrong");
+		});//end click
 
 		//and something to show the current index instead of q1
 	},
@@ -92,10 +121,10 @@ var game = {
 
 	// }, //end of displayQuestion
 
-	nextQuestion: function(){
-		// $("#question").html(game.trivia.q1"question");
-		game.start();
-	}, //end of nextQuestion
+	// nextQuestion: function(){
+	// 	// $("#question").html(game.trivia.q1"question");
+	// 	game.start();
+	// }, //end of nextQuestion
 
 	results: function(){
 		$("#question").html("<h2> Game Over! </h2>");
