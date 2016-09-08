@@ -16,6 +16,7 @@ $(document).ready(function(){
 var winCounter = 0;
 var lossCounter = 0;
 
+
 var game = {
 	
 	time:25,
@@ -61,23 +62,33 @@ var game = {
 // ==============================================================================		
     start: function(){
 	    var counter = setInterval(game.count, 1000);
-	    //set timeout here?
-	},
-	stop: function() {
-		if (game.time == 0) {
+	    if (game.time < 0) {
 			game.results();
 			clearInterval(counter);
 			//result page shows
 		}
-		else{
-			clearInterval(counter);
+	    //set timeout here?
+	},
+	stop: function() {
+		var currentTime = game.timeConverter(game.time);
+		if (game.time < 0) {
+			game.results();
+			clearInterval(currentTime);
+			//result page shows
 		}
+		// else{
+		// 	clearInterval();
+		// }
 		},
 	count: function(){
         game.time--;
         currentTime = game.timeConverter(game.time);
         $("#timer").html("<h3>" + currentTime + "</h3>");
-        console.log(currentTime);
+        //console.log(currentTime);
+        if (game.time < 0) {
+			game.results();
+			clearInterval(currentTime);
+		}
     },//end count
 
 	timeConverter: function(t){
@@ -109,56 +120,126 @@ var game = {
 			$("#a1").data('clicked', true);
 			winCounter++;
 			alert("Correct!");
+			game.nextQuestion();
 				// if(alert(r)){
 				// nextQuestion();
 				// } figure out how to load the next question -- timeout?
 		});//click
 		//wrong answer for first question
+//JUST ADDED IF ELSE. CHECK IF WORKS		
 		$("#a2, #a3, #a4").click(function() {
-			alert("WRONG!");
-				// if(r){
-				// }
-			lossCounter++;
-			console.log("clicked anything wrong");
+			if(jQuery("#a1").data('clicked')){
+				game.nextQuestion();
+			}
+			else{
+				alert("WRONG!");
+				lossCounter++;
+				console.log("clicked anything wrong");
+				game.nextQuestion();
+			}
 		});//end click
-		nextQuestion();
+		
 		//and something to show the current index instead of q1
 	},//end displayfirstquestion
 
 	nextQuestion: function(){
+		$("#a1").data('clicked', null);
 		$("#question").html("<h2>" + game.trivia.q2.question + "</h2>");
-			$("#a1").html("<p id='a1'>" + game.trivia.q2.a1 + "</p>");
-			$("#a2").html("<p id='a2'>" + game.trivia.q2.a2 + "</p>");
-			$("#a3").html("<p id='a3'>" + game.trivia.q2.a3 + "</p>");
-			$("#a4").html("<p id='a4'>" + game.trivia.q2.a4 + "</p>");
-			console.log("firstquestion");
-			//right answer for first question
-			$("#a2").click(function() {
-				console.log("Clicked a1");
-				$("#a1").data('clicked', true);
-				// nextQuestion ();
-				winCounter++;
-				alert("Correct!");
-					// if(alert(r)){
-					// nextQuestion();
-					// } figure out how to load the next question -- timeout?
-			});// end click
-			//wrong answer for first question
-			$("#a1, #a3, #a4").click(function() {
-				alert("WRONG!");
-					// if(r){
-					// 	nextQuestion();
-					// }
-				lossCounter++;
-				console.log("clicked anything wrong");
-			});//end click
-	 }, //end of nextQuestion
+		$("#a1").html("<p id='a1'>" + game.trivia.q2.a1 + "</p>");
+		$("#a2").html("<p id='a2'>" + game.trivia.q2.a2 + "</p>");
+		$("#a3").html("<p id='a3'>" + game.trivia.q2.a3 + "</p>");
+		$("#a4").html("<p id='a4'>" + game.trivia.q2.a4 + "</p>");
+		console.log("nextquestion");
+		//right answer for first question
+		$("#a3").click(function() {
+			console.log("Clicked a3");
+			$("#a3").data('clicked', true);
+			// nextQuestion ();
+			winCounter++;
+			alert("Correct!");
+			game.thirdQuestion();
+				// if(alert(r)){
+				// nextQuestion();
+				// } figure out how to load the next question -- timeout?
+		});// end click
+		//wrong answer for first question
+		$("#a1, #a2, #a4").click(function() {
+			alert("WRONG!");
+				// if(r){
+				// 	nextQuestion();
+				// }
+			lossCounter++;
+			console.log("clicked anything wrong");
+			game.thirdQuestion();
+		});//end click
+	 }, //end of thirdQuestion
+
+	thirdQuestion: function(){
+		$("#a3").data('clicked', null);
+		$("#question").html("<h2>" + game.trivia.q3.question + "</h2>");
+		$("#a1").html("<p id='a1'>" + game.trivia.q3.a1 + "</p>");
+		$("#a2").html("<p id='a2'>" + game.trivia.q3.a2 + "</p>");
+		$("#a3").html("<p id='a3'>" + game.trivia.q3.a3 + "</p>");
+		$("#a4").html("<p id='a4'>" + game.trivia.q3.a4 + "</p>");
+		console.log("thirdquestion");
+		//right answer for first question
+		$("#a2").click(function() {
+			console.log("Clicked a2");
+			$("#a2").data('clicked', true);
+			// nextQuestion ();
+			winCounter++;
+			alert("Correct!");
+				// if(alert(r)){
+				// nextQuestion();
+				// } figure out how to load the next question -- timeout?
+		});// end click
+		//wrong answer for first question
+		$("#a1, #a3, #a4").click(function() {
+			alert("WRONG!");
+				// if(r){
+				// 	nextQuestion();
+				// }
+			lossCounter++;
+			console.log("clicked anything wrong");
+		});//end click
+	 }, //end of thirdQuestion
+
+	 lastQuestion: function(){
+		$("#a2").data('clicked', null);
+		$("#question").html("<h2>" + game.trivia.q4.question + "</h2>");
+		$("#a1").html("<p id='a1'>" + game.trivia.q4.a1 + "</p>");
+		$("#a2").html("<p id='a2'>" + game.trivia.q4.a2 + "</p>");
+		$("#a3").html("<p id='a3'>" + game.trivia.q4.a3 + "</p>");
+		$("#a4").html("<p id='a4'>" + game.trivia.q4.a4 + "</p>");
+		console.log("thirdquestion");
+		//right answer for first question
+		$("#a4").click(function() {
+			console.log("Clicked a4");
+			$("#a4").data('clicked', true);
+			// nextQuestion ();
+			winCounter++;
+			alert("Correct!");
+				// if(alert(r)){
+				// nextQuestion();
+				// } figure out how to load the next question -- timeout?
+		});// end click
+		//wrong answer for first question
+		$("#a1, #a2, #3").click(function() {
+			alert("WRONG!");
+				// if(r){
+				// 	nextQuestion();
+				// }
+			lossCounter++;
+			console.log("clicked anything wrong");
+		});//end click
+	 }, //end of thirdQuestion
 
 	results: function(){
+		$("#timer").html(null);
 		$("#question").html("<h2> Game Over! </h2>");
 		$("#a1").html("<p id='a1'> Correct answers: " + winCounter + "</p>");
 		$("#a2").html("<p id='a2'> Incorrect answers: " + lossCounter + "</p>");
-		$("#a3").html("<p> 'To play again, refresh page.' </p>");
+		$("#a3").html("<p> To play again, refresh page. </p>");
 		$("#a4").html(null);
 		game.stop();
 	},
