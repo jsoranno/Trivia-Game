@@ -21,17 +21,17 @@ var game = {
 	time:25,
 
 	trivia: {
-		q1: {question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way Down"},
-		q2: {question: "Who is the founder of jQuery?", a1:"Bill Gates", a2:"John Resig", a3:"Mark Zuckerburg", a4:"Steve Jobs"},
-		q3: {question: "Who created Bootstrap?", a1:"Your mom", a2:"Facebook", a3:"Twitter", a4:"Stuart Weitzman"},
-		q4: {question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"},
+		q1: [question: "Who runs the world?", a1: "Girls", a2: "Machines", a3: "The Nothing", a4: "Turtles All The Way Down"],
+		q2: [question: "Who is the founder of jQuery?", a1:"Bill Gates", a2:"John Resig", a3:"Mark Zuckerburg", a4:"Steve Jobs"],
+		q3: [question: "Who created Bootstrap?", a1:"Your mom", a2:"Facebook", a3:"Twitter", a4:"Stuart Weitzman"],
+		q4: [question: "Who was the first woman programmer?", a1:"Grace Hopper", a2: "Ada Lovelace", a3: "Adele Goldberg", a4:"Karen Petrie"],
 
 	}, //end of trivia
 
-	correctq1: a1,
-	correctq2: a2,
-	correctq3: a3,
-	correctq4: a2, 
+	correctq1: game.trivia.q1.a1,
+	correctq2: game.trivia.q2.a2,
+	correctq3: game.trivia.q3.a3,
+	correctq4: game.trivia.q4.a2, 
 
 
 // FUNCTION DECLARATIONS
@@ -41,10 +41,10 @@ var game = {
 	},
 	stop: function() {
 		if (game.time === 0) {
-			//result page shows
+			game.results();//result page shows
 		}
 		else{
-			//nothing
+			game.start();//nothing
 		}
 		},
 	count: function(){
@@ -97,6 +97,14 @@ var game = {
 		game.start();
 	}, //end of nextQuestion
 
+	results: function(){
+		$("#question").html("<h2> Game Over! </h2>");
+		$("#a1").html("<p id='a1'> Correct answers: " + winCounter + "</p>");
+		$("#a2").html("<p id='a2'> Incorrect answers: " + lossCounter + "</p>");
+		$("#a3").html("<p> 'To play again, refresh page.' </p>");
+		$("#a4").html(null);
+	},
+
 
 
 
@@ -108,7 +116,8 @@ var game = {
 
 	$("#timer").on('click', game.start());
 	$("#question").on('click', game.displayFirstQuestion());
+
 }); // end document ready
-// $(document).ready(function(){
+
 
 
