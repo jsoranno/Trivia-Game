@@ -61,13 +61,16 @@ var game = {
 // ==============================================================================		
     start: function(){
 	    var counter = setInterval(game.count, 1000);
+	    //set timeout here?
 	},
 	stop: function() {
-		if (game.time === 0) {
-			game.results();//result page shows
+		if (game.time == 0) {
+			game.results();
+			clearInterval(counter);
+			//result page shows
 		}
 		else{
-			game.start();//nothing
+			clearInterval(counter);
 		}
 		},
 	count: function(){
@@ -100,31 +103,56 @@ var game = {
 		$("#a3").html("<p id='a3'>" + game.trivia.q1.a3 + "</p>");
 		$("#a4").html("<p id='a4'>" + game.trivia.q1.a4 + "</p>");
 		console.log("firstquestion");
+		//right answer for first question
 		$("#a1").click(function() {
 			console.log("Clicked a1");
 			$("#a1").data('clicked', true);
-			// nextQuestion ();
 			winCounter++;
 			alert("Correct!");
+				// if(alert(r)){
+				// nextQuestion();
+				// } figure out how to load the next question -- timeout?
 		});//click
-
+		//wrong answer for first question
 		$("#a2, #a3, #a4").click(function() {
 			alert("WRONG!");
+				// if(r){
+				// }
 			lossCounter++;
 			console.log("clicked anything wrong");
 		});//end click
-
+		nextQuestion();
 		//and something to show the current index instead of q1
-	},
-	// userAnswer: function(){
-	// 	if(){};
+	},//end displayfirstquestion
 
-	// }, //end of displayQuestion
-
-	// nextQuestion: function(){
-	// 	// $("#question").html(game.trivia.q1"question");
-	// 	game.start();
-	// }, //end of nextQuestion
+	nextQuestion: function(){
+		$("#question").html("<h2>" + game.trivia.q2.question + "</h2>");
+			$("#a1").html("<p id='a1'>" + game.trivia.q2.a1 + "</p>");
+			$("#a2").html("<p id='a2'>" + game.trivia.q2.a2 + "</p>");
+			$("#a3").html("<p id='a3'>" + game.trivia.q2.a3 + "</p>");
+			$("#a4").html("<p id='a4'>" + game.trivia.q2.a4 + "</p>");
+			console.log("firstquestion");
+			//right answer for first question
+			$("#a2").click(function() {
+				console.log("Clicked a1");
+				$("#a1").data('clicked', true);
+				// nextQuestion ();
+				winCounter++;
+				alert("Correct!");
+					// if(alert(r)){
+					// nextQuestion();
+					// } figure out how to load the next question -- timeout?
+			});// end click
+			//wrong answer for first question
+			$("#a1, #a3, #a4").click(function() {
+				alert("WRONG!");
+					// if(r){
+					// 	nextQuestion();
+					// }
+				lossCounter++;
+				console.log("clicked anything wrong");
+			});//end click
+	 }, //end of nextQuestion
 
 	results: function(){
 		$("#question").html("<h2> Game Over! </h2>");
@@ -132,6 +160,7 @@ var game = {
 		$("#a2").html("<p id='a2'> Incorrect answers: " + lossCounter + "</p>");
 		$("#a3").html("<p> 'To play again, refresh page.' </p>");
 		$("#a4").html(null);
+		game.stop();
 	},
 
 
@@ -145,6 +174,7 @@ var game = {
 
 	$("#timer").on('click', game.start());
 	$("#question").on('click', game.displayFirstQuestion());
+	
 
 }); // end document ready
 
