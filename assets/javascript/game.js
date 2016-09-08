@@ -119,7 +119,7 @@ var game = {
 			console.log("Clicked a1");
 			$("#a1").data('clicked', true);
 			winCounter++;
-			alert("Correct!");
+			//alert("Correct!");
 			game.nextQuestion();
 				// if(alert(r)){
 				// nextQuestion();
@@ -132,7 +132,7 @@ var game = {
 				game.nextQuestion();
 			}
 			else{
-				alert("WRONG!");
+				//alert("WRONG!");
 				lossCounter++;
 				console.log("clicked anything wrong");
 				game.nextQuestion();
@@ -156,7 +156,7 @@ var game = {
 			$("#a3").data('clicked', true);
 			// nextQuestion ();
 			winCounter++;
-			alert("Correct!");
+			//alert("Correct!");
 			game.thirdQuestion();
 				// if(alert(r)){
 				// nextQuestion();
@@ -164,7 +164,7 @@ var game = {
 		});// end click
 		//wrong answer for first question
 		$("#a1, #a2, #a4").click(function() {
-			alert("WRONG!");
+			//alert("WRONG!");
 				// if(r){
 				// 	nextQuestion();
 				// }
@@ -188,19 +188,21 @@ var game = {
 			$("#a2").data('clicked', true);
 			// nextQuestion ();
 			winCounter++;
-			alert("Correct!");
+			//alert("Correct!");
+			game.lastQuestion();
 				// if(alert(r)){
 				// nextQuestion();
 				// } figure out how to load the next question -- timeout?
 		});// end click
 		//wrong answer for first question
 		$("#a1, #a3, #a4").click(function() {
-			alert("WRONG!");
+			//alert("WRONG!");
 				// if(r){
 				// 	nextQuestion();
 				// }
 			lossCounter++;
 			console.log("clicked anything wrong");
+			game.lastQuestion();
 		});//end click
 	 }, //end of thirdQuestion
 
@@ -218,19 +220,21 @@ var game = {
 			$("#a4").data('clicked', true);
 			// nextQuestion ();
 			winCounter++;
-			alert("Correct!");
+			game.results();
+			//alert("Correct!");
 				// if(alert(r)){
 				// nextQuestion();
 				// } figure out how to load the next question -- timeout?
 		});// end click
 		//wrong answer for first question
 		$("#a1, #a2, #3").click(function() {
-			alert("WRONG!");
+			//alert("WRONG!");
 				// if(r){
 				// 	nextQuestion();
 				// }
 			lossCounter++;
 			console.log("clicked anything wrong");
+			game.results();
 		});//end click
 	 }, //end of thirdQuestion
 
